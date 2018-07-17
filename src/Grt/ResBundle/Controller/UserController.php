@@ -18,6 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Ldap\Ldap;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 /**
  * Class UserController
  * @package Intex\OrgBundle\Controller
@@ -485,6 +486,12 @@ class UserController extends Controller
                             'Нет' => '0',
                             'Да' => '1',
                         )
+                    ));
+                } elseif ($field == 'docName') {
+                    $formRes->add('docFile', VichImageType::class, array('label' => 'Прикрепить документ',
+                        'label_attr' =>array('for'=>'form_docFile_file'),
+                        'required' => false,
+                        'attr'
                     ));
                 } else {
                     $formRes->add($field,TextType::class, array('label' => $field,'attr'=> array('class'=>'form-control')));

@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ResourceType extends AbstractType
 {
@@ -31,6 +32,9 @@ class ResourceType extends AbstractType
         ));
         $builder->add('term', DateType::class, array('label' => 'Term(DD-MM-YYYY)',
             'widget' => 'single_text','format' => 'dd-mm-yyyy','attr'=> array('class'=>'input-group date form-control')));
+        $builder->add('docFile', VichImageType::class, [
+            'required' => false,
+        ]);
         /*$builder->add('base', EntityType::class, array('label' => 'Base',
             'class' => 'Grt\ResBundle\Entity\Base',
             'placeholder' => 'Выбирите ПТО',

@@ -4,13 +4,17 @@ namespace Grt\ResBundle\Entity;
 
 use Doctrine\DBAL\Types\DateType;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 /**
  *
  *
  * @ORM\Entity(repositoryClass="Grt\ResBundle\Entity\Repository\ResourceRepository")
  * @ORM\Table(name="resources")
- *
+ * @Vich\Uploadable
  * @ORM\HasLifecycleCallbacks
  */
 class Resource
@@ -68,6 +72,64 @@ class Resource
      * @ORM\Column(name="flag", type="boolean",options={"default" : 0})
      */
     protected $flag;
+
+
+    /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @Vich\UploadableField(mapping="resource_doc", fileNameProperty="docFileName")
+     *
+     * @var File
+     */
+    private $docFile;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @var string
+     */
+    private $docFileName;
+
+
+    /**
+     * @param File|UploadedFile $docFile
+     *
+     * @return Resource
+     */
+    public function setDocFile(File $docFile = null)
+    {
+        $this->docFile = $docFile;
+
+        return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getDocFile()
+    {
+        return $this->docFile;
+    }
+
+    /**
+     * @param string $docFileName
+     *
+     * @return Resource
+     */
+    public function setDocFileName(string $docFileName)
+    {
+        $this->docName = $docFileName;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDocFileName()
+    {
+        return $this->docFileName;
+    }
+
 
     /**
      * User that modified this resource
