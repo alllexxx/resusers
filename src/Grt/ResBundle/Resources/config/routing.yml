@@ -1,0 +1,239 @@
+grt_homepage:
+    path: /
+    defaults: { _controller: GrtResBundle:Page:index }
+    requirements:
+        methods:  GET
+
+grt_user_show:
+    path: /user/{userId}
+    defaults: { _controller: GrtResBundle:User:showUser}
+    requirements:
+        methods:  GET
+        userId:   \d+
+
+grt_users:
+    path: /users/{page}/{field}/{order}
+    defaults: { _controller: GrtResBundle:User:listUsers, page: 1, field: lastname, order: ASC }
+    requirements:
+        methods:  GET
+
+grt_show_users:
+    path: /users/
+    defaults: { _controller: GrtResBundle:User:listUsers }
+    requirements:
+        methods:  GET
+
+grt_bases:
+    path: /bases/{page}/{field}/{order}
+    defaults: { _controller: GrtResBundle:Base:listBases, page: 1, field: name, order: ASC }
+    requirements:
+        methods:  GET
+
+grt_list_bases:
+    path: /bases/
+    defaults: { _controller: GrtResBundle:Base:listBases }
+    requirements:
+        methods:  GET
+
+grt_show_base:
+    path: /base/{baseId}
+    defaults: { _controller: GrtResBundle:Base:showBase}
+    requirements:
+        methods:  GET
+        userId:   \d+
+
+grt_edit_base:
+    path: /edit-base/{baseId}
+    defaults: { _controller: GrtResBundle:Base:editBase }
+    requirements:
+        methods:  GET
+
+grt_create_base:
+    path: /new-base/
+    defaults: { _controller: GrtResBundle:Base:createBase }
+    requirements:
+        methods:  GET
+
+grt_new_base:
+    path: /new-base/
+    defaults: { _controller: GrtResBundle:Base:newBase }
+    requirements:
+        methods:  GET
+
+grt_show_users_base:
+    path: /users-base/{baseId}/{page}/{field}/{order}
+    defaults: { _controller: GrtResBundle:Base:showUsers, page: 1,field: lastname, order: ASC }
+    requirements:
+        methods:  GET
+        baseId: \d+
+
+grt_show_users_location:
+    path: /users-location/{locationId}/{page}/{field}/{order}
+    defaults: { _controller: GrtResBundle:Location:showUsers, page: 1,field: lastname, order: ASC }
+    requirements:
+        methods:  GET
+        locationId: \d+
+
+grt_show_users_department:
+    path: /users-department/{departmentId}/{page}/{field}/{order}
+    defaults: { _controller: GrtResBundle:Department:showUsers, page: 1,field: lastname, order: ASC }
+    requirements:
+        methods:  GET
+        departmentId: \d+
+
+grt_update_base:
+    path: /update-base/{baseId}
+    defaults: { _controller: GrtResBundle:Base:createBase}
+    requirements:
+        methods:  POST
+        userId: \d+
+
+grt_users_page:
+    path: /users/page/{page}/{field}/{order}
+    defaults: { _controller: GrtResBundle:User:listUsers, page: 1,field: lastname, order: ASC }
+    requirements:
+        methods:  GET
+
+grt_edit_user:
+    path: /edit-user/{userId}
+    defaults: { _controller: GrtResBundle:User:editUsers }
+    requirements:
+        methods:  GET
+
+grt_ldap_choice:
+    path: /ldap-users/
+    defaults: { _controller: GrtResBundle:User:showLdapUsers}
+
+grt_show_ldap_users:
+    path: /ldap-list-users/
+    defaults: { _controller: GrtResBundle:User:listLdapUsers}
+
+grt_upload_ldap_user:
+    path: /upload-ldap-user/{locationId}/{departmentId}
+    defaults: { _controller: GrtResBundle:User:uploadLdapUsers}
+    requirements:
+        methods:  POST
+        locationId: \d+
+        departmentld: \d+
+
+grt_add_resource_to_user:
+    path: /add-res-user/{userId}
+    defaults: { _controller: GrtResBundle:User:addResourceUser }
+    requirements:
+        methods:  POST
+        userId: \d+
+
+grt_create_resource:
+    path: /create-res/{userId}/{baseId}/{resourceId}
+    defaults: { _controller: GrtResBundle:User:createUserResource, resourceId: null }
+    requirements:
+        methods:  POST
+        userId: \d+
+        baseId: \d+
+        resourceId: \d+
+
+grt_new_user:
+    path: /new-user/
+    defaults: { _controller: GrtResBundle:User:newUser }
+    requirements:
+        methods:  GET
+
+grt_new_location:
+    path: /new-location/
+    defaults: { _controller: GrtResBundle:Location:addLocation }
+    requirements:
+        methods:  GET
+
+grt_create_location:
+    path: /create-location/
+    defaults: { _controller: GrtResBundle:Location:createLocation }
+    requirements:
+        methods:  POST
+        companyId: \d+
+
+grt_locations:
+    path: /locations/
+    defaults: { _controller: GrtResBundle:Location:index }
+    requirements:
+        methods:  GET
+
+grt_departments:
+    path: /departments/
+    defaults: { _controller: GrtResBundle:Department:index }
+    requirements:
+        methods:  GET
+
+grt_create_department:
+    path: /create-department/
+    defaults: { _controller: GrtResBundle:Department:createDepartment }
+    requirements:
+        methods:  POST
+        companyId: \d+
+
+grt_new_department:
+    path: /new-department/
+    defaults: { _controller: GrtResBundle:Department:addDepartment }
+    requirements:
+        methods:  GET
+
+grt_update_user:
+    path: /update_user/{userId}
+    defaults: { _controller: GrtResBundle:User:createUser}
+    requirements:
+        methods:  POST
+        userId: \d+
+
+grt_create_user:
+    path: /create-user/
+    defaults: { _controller: GrtResBundle:User:createUser}
+    requirements:
+        methods:  POST
+
+grt_delete_user:
+    path: /del-user/{userId}
+    defaults: { _controller: GrtResBundle:User:deleteUser }
+    requirements:
+        methods:  GET
+        userId:   \d+
+
+grt_deactivate_user:
+    path: /deactive-user/{userId}/{activity}
+    defaults: { _controller: GrtResBundle:User:deactivateUser }
+    requirements:
+        methods:  GET
+        userId:   \d+
+
+grt_search_user:
+    path: /search-user/
+    defaults: { _controller: GrtResBundle:User:searchForm}
+    requirements:
+        methods:  POST
+
+grt_find_user:
+    path: /find-user/
+    defaults: { _controller: GrtResBundle:User:searchUser}
+    requirements:
+        methods:  POST
+
+grt_delete_resource:
+    path: /del-res/{userId}/{resourceId}
+    defaults: { _controller: GrtResBundle:Resource:deleteResource }
+
+
+grt_show_resource:
+    path: /show-resource/{userId}/{resourceId}
+    defaults: { _controller: GrtResBundle:Resource:showResource }
+    requirements:
+        methods:  GET
+
+grt_edit_resource:
+    path: /edit-resource/{userId}/{resourceId}
+    defaults: { _controller: GrtResBundle:Resource:editResource }
+    requirements:
+        methods:  GET
+
+grt_check_resource:
+    path: /check-resource/
+    defaults: { _controller: GrtResBundle:Resource:checkResources }
+    requirements:
+        methods:  GET

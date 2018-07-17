@@ -1,0 +1,91 @@
+{% extends 'GrtResBundle::layout.html.twig' %}
+
+{% block namepage %}
+    <h3>
+        {% trans %} Список пользователей {% endtrans %}
+        {% if  department is defined  %}
+           {{ department }}
+        {% endif %}
+    </h3>
+{% endblock %}
+
+{% block body %}
+
+    <div class="search-field">
+        <form name="form" method="post" action="{{ path('grt_find_user') }}" class="searchfield">
+           <input id="form_lastname" name="form[lastname]" class="form-control" type="text" placeholder="Поиск по фамилии">
+        </form>
+
+    </div>
+
+    {{ include('GrtResBundle:User:users-table.html.twig') }}
+
+
+    <script>
+        function preDelete()
+        {
+            if (confirm("Уверены что хотите деактивироать/активировать пользователя?")) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
+
+
+    {% if maxPages > 1 %}
+        <div class="paginator">
+            <div class="row">
+                <ul class="pagination pagination-sm">
+                    {# `«` arrow  #}
+                    <li {{ thisPage == 1 ? 'class="disabled"' }}>
+                        {% if app.request.attributes.get('_route' )== 'grt_show_users' %}
+                            <a href="{{ path('grt_users', {page: thisPage-1 < 1 ? 1 : thisPage-1}) }}">«</a>
+                        {% else %}
+                            <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all|merge({'page': thisPage-1 < 1 ? 1 : thisPage-1 }))) }}">«</a>
+                        {% endif %}
+                    </li>
+
+                    {# Render each page number #}
+                    {% for i in 1..maxPages %}
+                    <li {{ thisPage == i ? 'class="active"' }}>
+                        {% if app.request.attributes.get('_route' )== 'grt_show_users' %}
+                            <a href="{{ path('grt_users', {page: i}) }}">{{ i }}</a>
+                        {% else %}
+                            <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all|merge({'page':  i })))}}">{{ i }}</a>
+                        {% endif %}
+                    </li>
+
+                    {% endfor %}
+
+                    {# `»` arrow #}
+                    <li {{ thisPage == maxPages ? 'class="disabled"' }}>
+                        {% if app.request.attributes.get('_route' )== 'grt_show_users' %}
+                            <a href="{{ path('grt_users', {page: thisPage+1 <= maxPages ? thisPage+1 : thisPage}) }}">»</a>
+                        {% else %}
+                            <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all|merge({'page':  thisPage+1 <= maxPages ? thisPage+1 : thisPage }))) }}">»</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+
+    {% for error_message in app.session.flashBag.get('error') %}
+        <div class="alert alert-danger" role="alert">
+            {{ error_message }}
+        </div>
+    {% endfor %}
+
+    {% for error_message in app.session.flashBag.get('warning') %}
+        <div class="alert alert-warning">
+            {{ error_message }}
+        </div>
+    {% endfor %}
+
+    {% for success_message in app.session.flashBag.get('success') %}
+        <div class="alert alert-success" role="alert">
+            {{ success_message }}
+        </div>
+    {% endfor %}
+{% endblock %}

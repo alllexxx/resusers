@@ -1,0 +1,35 @@
+{% extends 'GrtResBundle::layout.html.twig' %}
+
+
+
+{% block namepage %}
+    <h3>
+        {% trans %} Поиск пользователей {% endtrans %}
+    </h3>
+{% endblock %}
+
+{% block body %}
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Найти пользователей</div>
+        <div class="panel-body">
+
+            {{ form_start(form, { 'action': path('grt_find_user'), 'method': 'POST', 'attr': {'class': 'searchform'} }) }}
+            {{ form_widget(form) }}
+            <div class="submit">
+                <input type="submit" value="Найти пользователя" class="btn btn-default">
+            </div>
+
+        </div>
+    </div>
+
+    {{ include('GrtResBundle:User:users-table.html.twig') }}
+
+    {% for error_message in app.session.flashBag.get('warning') %}
+        <div class="alert alert-warning">
+            {{ error_message }}
+        </div>
+    {% endfor %}
+
+{% endblock %}

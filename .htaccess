@@ -1,0 +1,2 @@
+RewriteRule ^(.*?)/?$ /web/$1/ [L]
+RewriteRule ^(.*)$ /web/$1 [L]

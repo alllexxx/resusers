@@ -1,0 +1,38 @@
+{% extends 'GrtResBundle::layout.html.twig' %}
+
+
+
+{% block namepage %}
+    <h3>
+        {% trans %} Загрузить пользователей из LDAP {% endtrans %}
+    </h3>
+{% endblock %}
+
+{% block body %}
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">Загрузить пользователей</div>
+    <div class="panel-body">
+
+        {{ form_start(form, { 'action': path('grt_show_ldap_users'), 'method': 'POST', 'attr': {'class': 'ldapform'} }) }}
+        {{ form_widget(form) }}
+        <div class="submit">
+            <input type="submit" value="Загрузить с LDAP" class="btn btn-default">
+        </div>
+
+    </div>
+</div>
+
+    {% for error_message in app.session.flashBag.get('error') %}
+        <div class="alert alert-danger" role="alert">
+            {{ error_message }}
+        </div>
+    {% endfor %}
+    {% for success_message in app.session.flashBag.get('success') %}
+        <div class="alert alert-success" role="alert">
+            {{ success_message }}
+        </div>
+    {% endfor %}
+
+{% endblock %}

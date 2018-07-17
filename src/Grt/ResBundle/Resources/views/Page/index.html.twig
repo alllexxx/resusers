@@ -1,0 +1,42 @@
+{% extends '::base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/home_page.css') }}">
+{% endblock %}
+
+{% block namepage %}
+    <h3>
+        {% trans %} Main {% endtrans %}
+    </h3>
+{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-xs-6 col-md-3">
+            <a href="{{ path('grt_users') }}" class="thumbnail">
+                <i class="fa fa-users fa-5x" aria-hidden="true"></i>
+                <p>{% trans %}Показать пользователей{% endtrans %}</p>
+            </a>
+        </div>
+        <div class="col-xs-6 col-md-3">
+            <a href="{{ path('grt_new_user') }}" class="thumbnail">
+                <i class="fa fa-user-plus fa-5x" aria-hidden="true"></i>
+                <p>Добавить пользователя</p>
+            </a>
+        </div>
+        <div class="col-xs-6 col-md-3">
+            <a href="{{ path('grt_list_bases') }}"  class="thumbnail">
+                <i class="fa fa-database fa-5x" aria-hidden="true"></i>
+                <p>Показать ресурсы</p>
+            </a>
+        </div>
+        <div class="col-xs-6 col-md-3">
+            <a href="{{ path('grt_check_resource') }}" class="thumbnail">
+                <i class="fa fa-user-clock fa-5x" aria-hidden="true"></i>
+                <p>Показать пользователей с истекающими ресурсами</p>
+            </a>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends '::base.html.twig' %}
+
+{% block sidebar %}
+    <aside class="sidebar">
+        {% if is_granted('ROLE_ADMIN') %}
+
+        <div class="btn-group">
+            <div class="dropdown">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Пользователи<span><i class="fa fa-caret-right" aria-hidden="true"></i></span>
+
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="{{ path('grt_show_users') }}">Показать пользователей</a></li>
+                    <li><a href="{{ path('grt_new_user') }}">Добавить пользователей</a></li>
+                </ul>
+            </div>
+            <div class="dropdown">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    ПТО<span><i class="fa fa-caret-right" aria-hidden="true"></i></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="{{ path('grt_locations') }}">Показать ПТО</a></li>
+                    <li><a href="{{ path('grt_new_location') }}">Добавить ПТО</a></li>
+                </ul>
+            </div>
+            <div class="dropdown">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Отделы<span><i class="fa fa-caret-right" aria-hidden="true"></i></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="{{ path('grt_departments') }}">Показать отделы</a></li>
+                    <li><a href="{{ path('grt_new_department') }}">Добавить отдел</a></li>
+
+                </ul>
+            </div>
+            <div class="dropdown">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Базы<span><i class="fa fa-caret-right" aria-hidden="true"></i></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="{{ path('grt_list_bases') }}">Показать ресурсы</a></li>
+                    <li><a href="{{ path('grt_new_base') }}">Добавить ресурс</a></li>
+                </ul>
+            </div>
+            <ul class="nav nav-pills nav-stacked">
+                <li><a href="{{ path('grt_ldap_choice') }}">Загрузить пользователей из LDAP</a></li>
+                <li><a href="{{ path('grt_check_resource') }}">Проверить ресурсы</a></li>
+                <li><a href="{{ path('grt_search_user') }}">Поиск сотрудников</a></li>
+            </ul>
+        </div>
+        {% else %}
+
+                <ul class="nav nav-pills nav-stacked">
+                    <li><a href="{{ path('grt_show_users') }}">Показать пользователей</a></li>
+                    <li><a href="{{ path('grt_new_user') }}">Добавить пользователей</a></li>
+                    <li><a href="{{ path('grt_departments') }}">Показать отделы</a></li>
+                    <li><a href="{{ path('grt_locations') }}">Показать ПТО</a></li>
+                    <li><a href="{{ path('grt_list_bases') }}">Показать ресурсы</a></li>
+                    <li><a href="{{ path('grt_search_user') }}">Поиск сотрудников</a></li>
+                    <li><a href="{{ path('grt_check_resource') }}">Проверить истекающие ресурсы</a></li>
+                    <li><a href="{{ path('grt_ldap_choice') }}">Загрузить пользователей из LDAP</a></li>
+
+                </ul>
+
+        {% endif %}
+
+    </aside>
+{% endblock %}

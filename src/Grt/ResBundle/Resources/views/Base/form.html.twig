@@ -1,0 +1,31 @@
+{% extends 'GrtResBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/form_style.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('build/form.js') }}"></script>
+{% endblock %}
+
+{% block namepage %}
+    <h3>
+        Добавить Базу
+    </h3>
+{% endblock %}
+
+{% block body %}
+    {% if baseId is defined %}
+        {{ form_start(form, { 'action': path('grt_update_base',{ 'baseId': baseId}), 'method': 'POST', 'attr': {'class': 'baseform'} }) }}
+    {% else %}
+        {{ form_start(form, { 'action': path('grt_create_base'), 'method': 'POST', 'attr': {'class': 'baseform'} }) }}
+    {% endif %}
+    {{ form_widget(form) }}
+    <p>
+        <input type="submit" value="{% trans %}Submit{% endtrans %}" class="btn btn-default">
+    </p>
+
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends '::base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/home_page.css') }}">
+{% endblock %}
+
+{% block login %}
+    <div class="login"></div><h3>Please Log In</h3></div>
+
+    <form action="{{ path('fos_user_security_check') }}" method="POST" class="fos_user_login">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+        <div class="form-group">
+            <label for="inputUsernameEmail">Username or email</label>
+            <input type="text" id="inputUsernameEmail" name="_username" value="{{ last_username }}" required="required" class="form-control" />
+        </div>
+        <div class="form-group">
+            <a class="pull-right" href="#">Forgot password?</a>
+            <label for="inputPassword">Password</label>
+            <input type="password" class="form-control" id="inputPassword" name="_password" required="required" />
+        </div>
+        <div class="checkbox pull-right">
+            <label>
+                <input type="checkbox">
+                Remember me </label>
+        </div>
+        <button type="submit" class="btn btn btn-primary">
+            Log In
+        </button>
+    </form>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'GrtResBundle::layout.html.twig' %}
+
+{% block namepage %}
+    <h3>
+        {% trans %} Список ПТО {% endtrans %}
+    </h3>
+{% endblock %}
+
+{% block body %}
+
+    {% if locations %}
+        <table class="table table-striped table-hover">
+            {% block table_header %}
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Название расположения</th>
+                    <th colspan="3">Действия</th>
+                </tr>
+            </thead>
+            {% endblock %}
+            {% block table_body %}
+            <tbody>
+            {% for location in locations %}
+                <tr>
+                    <td scope="row">{{ loop.index }}</td>
+                    <td>{{ location.name }}</td>
+                    <td>
+                        <a href="{{ path('grt_show_users_location', { 'locationId': location.id }) }}" title="{% trans %}Show users in this location{% endtrans %}">
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                        </a>
+                    </td>
+		    <td>
+                        <a href="{{ path('grt_create_location', { 'locationId': location.id }) }}" title="{% trans %}Edit this location{% endtrans %}">
+                            <i class="fa fa-edit" aria-hidden="true"></i>
+                        </a>
+                    </td>
+		    <td>
+                        <a href="{{ path('grt_create_location', { 'locationId': location.id }) }}" title="{% trans %}Disactivate this location{% endtrans %}">
+                            <i class="fa fa-low-vision" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            {% endblock %}
+        </table>
+    {% else %}
+        <p>{% trans %}There are no users{% endtrans %}</p>
+    {% endif %}
+
+{% endblock %}
