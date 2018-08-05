@@ -94,10 +94,12 @@ class ResourceRepository extends \Doctrine\ORM\EntityRepository
 
     public function getResourceTermExpired($term = 30)
     {
-        $date = date("Y-m-d");
-        $date = strtotime($date);
 
-        $date = strtotime("-".$term." day", $date);
+        $dateNow = strtotime(date("Y-m-d"));
+
+        $date = strtotime("+".$term." day", $dateNow);
+
+        $d = date('Y-m-d', $date);
 
         $db = $this->createQueryBuilder('r')
             ->select('r')

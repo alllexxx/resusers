@@ -82,3 +82,4 @@ vich_uploader:
             resource_doc:
                 uri_prefix:         /resources/docs
                 upload_destination: '%kernel.root_dir%/../web/resources/docs'
+                namer: namer.file_upload

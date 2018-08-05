@@ -18,3 +18,9 @@ services:
             class: Grt\ResBundle\Services\SortArray
             public: true
 
+    namer.file_upload:
+        public: true
+        class: Grt\ResBundle\Services\Namer
+        arguments: ['@service_container']
+        tags:
+           - { name: namer }

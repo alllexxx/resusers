@@ -24,13 +24,31 @@
             {% block table_body %}
                 <tbody>
                 {% for resource in resources %}
-                    <tr>
+                    {% if resource.term is not null and resource.term|date('d-m-Y')!='30-11--0001' %}
+                        {% if date(resource.term) < date('Europe/Minsk') %}
+                            <tr class="hint" style="background-color: #ebccd1 !important;" >
+                        {% elseif date(resource.term) < date('+30days', 'Europe/Minsk') %}
+                            <tr class="hint" style="background-color: #FFFF99 !important;" >
+                        {% endif %}
+                    {% else %}
+                        <tr class="hint">
+                    {% endif %}
                         <td scope="row">{{ loop.index }}</td>
                         <td>{{ resource.user.lastname
                             }}</td>
                         <td>{{ resource.login }}</td>
-			<td>{{ resource.base }}</td>
-                        <td>{{ resource.term|date('d-m-Y') }}</td>
+			            <td>{{ resource.base }}</td>
+
+                        {% if resource.term is not null and resource.term|date('d-m-Y')!='01-01-2100'  %}
+                            {% if date(resource.term) < date('Europe/Minsk') %}
+                                <td style="color: #C82829;"> {{ resource.term|date('d-m-Y') }} </td>
+                            {% elseif date(resource.term) < date('+30days', 'Europe/Minsk') %}
+                                <td style="color: #3A853A;"> {{ resource.term|date('d-m-Y') }} </td>
+                            {% else %}
+                                <td> {{ resource.term|date('d-m-Y') }} </td>
+                            {% endif %}
+                        {% endif %}
+
                         <td>
                             <a href="{{ path('grt_show_resource', { 'userId': resource.user.id, 'resourceId': resource.id }) }}" title="{% trans %}Show resource{% endtrans %}">
                                 <i class="fa fa-eye" aria-hidden="true"></i>

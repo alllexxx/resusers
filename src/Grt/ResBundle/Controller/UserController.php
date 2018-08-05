@@ -19,6 +19,8 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Ldap\Ldap;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Vich\UploaderBundle\Form\Type\VichImageType;
+use Vich\UploaderBundle\Handler\DownloadHandler;
+use Symfony\Component\HttpFoundation\File\Upload;
 /**
  * Class UserController
  * @package Intex\OrgBundle\Controller
@@ -487,12 +489,10 @@ class UserController extends Controller
                             'Да' => '1',
                         )
                     ));
-                } elseif ($field == 'docName') {
+                } elseif ($field == 'docFileName') {
                     $formRes->add('docFile', VichImageType::class, array('label' => 'Прикрепить документ',
-                        'label_attr' =>array('for'=>'form_docFile_file'),
-                        'required' => false,
-                        'attr'
-                    ));
+                         'required' => false,
+                         ));
                 } else {
                     $formRes->add($field,TextType::class, array('label' => $field,'attr'=> array('class'=>'form-control')));
                 }
@@ -526,14 +526,16 @@ class UserController extends Controller
             $em = $this->getDoctrine()->getManager();
             $user = $this->getUserById($userId);
             $base = $this->getBaseById($baseId);
+
+
             if ($resourceId) {
                 $resource = $em->getRepository('GrtResBundle:Resource')->find($resourceId);
             } else {
                 $resource = new Resource();
                 $resource->setUser($user);
                 $resource->setBase($base);
-            }
 
+            }
 
             if ((!$user) || (!$base)) {
                 throw $this->createNotFoundException('Unable to find user or base.');
@@ -543,9 +545,6 @@ class UserController extends Controller
             $fields = explode(",", $base->getFields());
             $form = $request->get("form");
 
-            /*$form = $this->createForm(ResourceType::class, $resource);
-            $form->handleRequest($request);
-            */
 
             $admin = $em->getRepository('GrtResBundle:Admin')->find($form['admin']);
             if (!$admin){
@@ -554,10 +553,16 @@ class UserController extends Controller
 
             $resource->setAdmin($admin);
 
+            $uploadedFile = $request->files->get('form');
+            if (null !== $uploadedFile){
+                $resource->setDocFile($uploadedFile['docFile']['file']);
+                $file = $uploadedFile['docFile']['file'];
+                $resource->setDocFileName($file->getPathName());
+            }
+
             foreach ($fields as $field) {
                 $resource->$field = $form[$field];
             }
-
 
             $em->persist($resource);
 

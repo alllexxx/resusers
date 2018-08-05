@@ -76,10 +76,13 @@ class Resource
 
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
-     *
+     * @Assert\File(
+     *     maxSize="5M",
+     *     mimeTypes={"image/png", "image/jpeg"}
+     * )
      * @Vich\UploadableField(mapping="resource_doc", fileNameProperty="docFileName")
      *
-     * @var File
+     * @var File $docFile
      */
     private $docFile;
 
@@ -99,8 +102,6 @@ class Resource
     public function setDocFile(File $docFile = null)
     {
         $this->docFile = $docFile;
-
-        return $this;
     }
 
     /**
@@ -118,8 +119,7 @@ class Resource
      */
     public function setDocFileName(string $docFileName)
     {
-        $this->docName = $docFileName;
-        return $this;
+        $this->docFileName = $docFileName;
     }
 
     /**

@@ -59,4 +59,11 @@ class ResourceType extends AbstractType
     {
         return 'grt_resourcetype';
     }
+
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults([
+            'data_class' => 'Grt\ResBundle\Entity\Resource',
+        ]);
+    }
 }
