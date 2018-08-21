@@ -12,7 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-
+use Vich\UploaderBundle\Form\Type\VichImageType;
+use Symfony\Component\HttpFoundation\File\Upload;
 /**
  * Class BaseController
  * @package Grt\ResBundle\Controller
@@ -63,7 +64,6 @@ class ResourceController extends Controller
             if( $this->container->get( 'security.authorization_checker' )->isGranted( 'IS_AUTHENTICATED_FULLY' ) )
             {
                 $admin= $this->container->get('security.token_storage')->getToken()->getUser();
-
             }
 
             $em = $this->getDoctrine()->getManager();
@@ -89,6 +89,13 @@ class ResourceController extends Controller
                             ),
                         'data' => '0',
                         'empty_data' => '0'
+                    ));
+                } elseif ($field == 'docFileName') {
+                    $formRes->add('docFile', VichImageType::class, array('label' => 'Прикрепить документ',
+                        'required' => false,
+                        'data' => $resource->getDocFile(),
+                        'download_uri' => false,
+                        'delete_label' => 'Delete image ?'
                     ));
                 } else {
                     $formRes->add($field,TextType::class, array('label' => $field,'data'=> $resource->$field, 'attr'=> array('class'=>'form-control')));

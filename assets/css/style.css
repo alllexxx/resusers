@@ -296,3 +296,7 @@ label[for=form_admin]
 #grt_departmenttype{
     margin: 0 0 20px 0;
 }
+
+.vich-image img {
+    height: 100px;
+}

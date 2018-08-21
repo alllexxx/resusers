@@ -77,8 +77,7 @@ class Resource
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      * @Assert\File(
-     *     maxSize="5M",
-     *     mimeTypes={"image/png", "image/jpeg"}
+     *     maxSize="5M"
      * )
      * @Vich\UploadableField(mapping="resource_doc", fileNameProperty="docFileName")
      *

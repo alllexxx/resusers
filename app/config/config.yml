@@ -80,6 +80,6 @@ vich_uploader:
     db_driver: orm
     mappings:
             resource_doc:
-                uri_prefix:         /resources/docs
+                uri_prefix:         '/resourcesusrs/web/resources/docs'
                 upload_destination: '%kernel.root_dir%/../web/resources/docs'
                 namer: namer.file_upload

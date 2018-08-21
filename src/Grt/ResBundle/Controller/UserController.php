@@ -19,7 +19,6 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Ldap\Ldap;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Vich\UploaderBundle\Form\Type\VichImageType;
-use Vich\UploaderBundle\Handler\DownloadHandler;
 use Symfony\Component\HttpFoundation\File\Upload;
 /**
  * Class UserController
