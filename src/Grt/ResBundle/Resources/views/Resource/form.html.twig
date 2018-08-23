@@ -27,6 +27,7 @@
     {% endif %}
 
 {#{{ form_widget(form) }}#}
+    {{ form_row(form.admin) }}
      {% if form.ip is defined %}
         {{ form_row(form.ip) }}
      {% endif %}

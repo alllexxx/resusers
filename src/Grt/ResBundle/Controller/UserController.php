@@ -554,14 +554,18 @@ class UserController extends Controller
             $resource->setAdmin($admin);
 
             $uploadedFile = $request->files->get('form');
-            if (null !== $uploadedFile){
-                $resource->setDocFile($uploadedFile['docFile']['file']);
-                $file = $uploadedFile['docFile']['file'];
-                $resource->setDocFileName($file->getPathName());
-            }
+
 
             foreach ($fields as $field) {
-                $resource->$field = $form[$field];
+                if ($field != 'file'){
+                    $resource->$field = $form[$field];
+                } elseif ($field == 'file'){
+                    if (null !==$uploadedFile['docFile']['file']){
+                        $resource->setDocFile($uploadedFile['docFile']['file']);
+                        $file = $uploadedFile['docFile']['file'];
+                        $resource->setDocFileName($file->getPathName());
+                    }
+                }
             }
 
             $em->persist($resource);
