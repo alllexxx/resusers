@@ -8,6 +8,7 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('build/form.js') }}"></script>
+    <script src="{{ asset('build/check-select.js') }}"></script>
 {% endblock %}
 
 {% block namepage %}
@@ -25,7 +26,30 @@
         {{ form_start(form, { 'action': path('grt_create_resource', { 'userId': user.id, 'baseId': baseId}), 'method': 'POST', 'attr': {'class': 'resourceform'} }) }}
     {% endif %}
 
-    {{ form_widget(form) }}
+{#{{ form_widget(form) }}#}
+     {% if form.ip is defined %}
+        {{ form_row(form.ip) }}
+     {% endif %}
+     {% if form.login is defined %}
+        {{ form_row(form.login) }}
+     {% endif %}
+     {% if form.term is defined %}
+        {{ form_row(form.term) }}
+     {% endif %}
+    <label> Обоснование:</label>
+    <div>
+        <select id="cause" name="cause">
+            <option selected value="delo">по САЭД "Дело"</option>
+            <option value="file">из файла</option>
+        </select>
+    </div>
+    {% if form.annotation is defined %}
+        {{ form_row(form.annotation) }}
+     {% endif %}
+     {% if form.docFile is defined %}
+        {{ form_row(form.docFile) }}
+     {% endif %}
+
     <p>
         <input type="submit" value="{% trans %}Submit{% endtrans %}" class="btn btn-default">
     </p>
@@ -36,4 +60,6 @@
         </div>
     {% endfor %}
 
+
 {% endblock %}
+

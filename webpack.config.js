@@ -13,6 +13,8 @@ Encore
     /*Js for Form add user*/
     .addEntry('form', './assets/js/form.js')
 
+    .addEntry('check-select', './assets/js/check-select.js')
+
     .addEntry('all-checkbox', './assets/js/all-checkbox.js')
     /*JS for check uploaded XML-file*/
     .addEntry('check', './assets/js/check-file-size.js')

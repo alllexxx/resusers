@@ -491,6 +491,7 @@ class UserController extends Controller
                 } elseif ($field == 'docFileName') {
                     $formRes->add('docFile', VichImageType::class, array('label' => 'Прикрепить документ',
                          'required' => false,
+                         'attr'=> array('class'=>'hidden-row')
                          ));
                 } else {
                     $formRes->add($field,TextType::class, array('label' => $field,'attr'=> array('class'=>'form-control')));

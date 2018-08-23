@@ -66,10 +66,10 @@
                             {{ resource.login }}
                         </td>
                         <td>
-                            {% if resource.term is not null and resource.term|date('d-m-Y')!='01-01-2100'  %}
+                            {% if resource.term is not null and resource.term|date('d-m-Y')!='01-01-2100' and resource.term|date('d-m-Y')!='30-11--0001' %}
                                 {% if date(resource.term) < date('+30days', 'Europe/Minsk') %}
                                     <span style="color: #C82829;"> {{ resource.term|date('d-m-Y') }} </span>
-                                {% else %}
+                                {% elseif resource.term|date('d-m-Y')!='30-11--0001' %}
                                     <span> {{ resource.term|date('d-m-Y') }} </span>
                                 {% endif %}
                             {% endif %}

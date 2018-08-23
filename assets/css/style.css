@@ -300,3 +300,8 @@ label[for=form_admin]
 .vich-image img {
     height: 100px;
 }
+
+.hidden-row {
+    visibility: hidden;
+
+}
