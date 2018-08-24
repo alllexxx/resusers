@@ -560,7 +560,7 @@ class UserController extends Controller
                 if ($field != 'file'){
                     $resource->$field = $form[$field];
                 } elseif ($field == 'file'){
-                    if (null !==$uploadedFile['docFile']['file']){
+                    if (null !=$uploadedFile['docFile']['file']){
                         $resource->setDocFile($uploadedFile['docFile']['file']);
                         $file = $uploadedFile['docFile']['file'];
                         $resource->setDocFileName($file->getPathName());

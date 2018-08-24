@@ -36,6 +36,12 @@
                     <td>{{ resource.annotation}}</td>
                 </tr>
             {% endif %}
+            {% if resource.docFile %}
+                <tr>
+                    <td class="name-col">{% trans %}Приложение{% endtrans %}</td>
+                    <td>{{ resource.docFile}}</td>
+                </tr>
+            {% endif %}
             <tr>
                 <td class="name-col">{% trans %}Admin that last modified {% endtrans %}</td>
                 <td>{{ resource.admin.username}}</td>

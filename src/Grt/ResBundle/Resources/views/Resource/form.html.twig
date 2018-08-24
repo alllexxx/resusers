@@ -37,6 +37,9 @@
      {% if form.term is defined %}
         {{ form_row(form.term) }}
      {% endif %}
+    {% if form.flag is defined %}
+        {{ form_row(form.flag) }}
+    {% endif %}
     <label> Обоснование:</label>
     <div>
         <select id="cause" name="cause">

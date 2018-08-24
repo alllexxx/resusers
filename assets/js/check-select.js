@@ -2,7 +2,7 @@ var $ = require('jquery');
 
 $(document).ready(function() {
 
-    $("select").change(function(){
+    $("#cause").change(function(){
         $( "select option:selected" ).each(function() {
             if($(this).val()=='file') {
                 document.getElementById('form_annotation').value="Файл";
